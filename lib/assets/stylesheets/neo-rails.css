@@ -1,0 +1,1 @@
+//= require neo/rails/scenarios/render_scenarios_list

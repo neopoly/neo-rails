@@ -18,7 +18,15 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Scenarios
+
+In app/assets/stylesheets/application.css:
+
+    //= require neo-rails
+
+In app/layouts/application.html.haml
+
+    = render_scenarios_list
 
 ## Contributing
 
