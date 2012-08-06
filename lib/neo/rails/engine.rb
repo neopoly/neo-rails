@@ -8,6 +8,14 @@ module Neo
           include Neo::Rails::Scenarios::RailsHelper
         end
       end
+
+      initializer "neo-rails.presenter_method" do
+        ActiveSupport.on_load(:action_controller) do
+          before_filter do |controller|
+            Neo::Rails::Presenter.view_context = controller.view_context
+          end
+        end
+      end
     end
   end
 end
