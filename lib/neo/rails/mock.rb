@@ -47,12 +47,12 @@ module Neo
         @mock = MockConfig.new(args)
       end
 
-      # Returns a human readable tag list.
       class MockConfig
         def initialize(args)
           @tags = args
         end
 
+        # Returns a human readable tag list.
         def description
           @tags.to_a.map { |tag| tag.to_s.capitalize }.join(", ")
         end
