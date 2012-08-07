@@ -1,3 +1,5 @@
+require 'active_support/concern'
+
 module Neo
   module Rails
     # A really simple version of exposing variables to the view.
