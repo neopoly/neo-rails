@@ -1,3 +1,5 @@
+require 'active_support/concern'
+
 module Neo
   module Rails
     # Enables controller actions to have scenarios, which will be applied

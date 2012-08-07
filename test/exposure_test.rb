@@ -1,9 +1,10 @@
 require 'helper'
+
 require 'rack/test'
+require 'action_controller/railtie'
 
 require 'neo/rails/exposure'
 
-require 'action_controller/railtie'
 
 class ExposureTestController < ActionController::Base
   include Neo::Rails::Exposure
