@@ -28,13 +28,29 @@ class ExposureTestController < ActionController::Base
   end
 
   def expose_with_error
-    expose(:c) { "c" }
+    expose(:unknown) { "unknown" }
   end
+end
+
+class OtherExposureTestController < ExposureTestController
+  include Neo::Rails::Exposure
+
+  exposes :c
+
+  def bar
+    expose :a, "a"
+    expose :b, "b"
+    expose :c, "c"
+
+    render :inline => "<%= a %>;<%= b %>;<%= c %>"
+  end
+
 end
 
 class ExposureTestApp < Rails::Application
   routes.draw do
     match ":action" => ExposureTestController
+    match "other/:action" => OtherExposureTestController
   end
 
   config.session_store :disabled
@@ -64,5 +80,10 @@ class ExposureTest < NeoRailsCase
     assert_raises Neo::Rails::Exposure::UndeclaredVariableError do
       get :expose_with_error
     end
+  end
+
+  test "exposes vars in subclass" do
+    get "other/bar"
+    assert_equal "a;b;c", last_response.body
   end
 end

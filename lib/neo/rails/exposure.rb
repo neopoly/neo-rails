@@ -11,7 +11,7 @@ module Neo
 
       included do
         class_attribute :exposed_vars
-        self.exposed_vars = Set.new
+        self.exposed_vars ||= Set.new
       end
 
       module ClassMethods
