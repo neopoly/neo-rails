@@ -47,10 +47,30 @@ class OtherExposureTestController < ExposureTestController
 
 end
 
+class ATestController < ExposureTestController
+  exposes :z
+
+  def baz
+    expose :z, "z"
+    render :inline => "<%= z %>"
+  end
+end
+
+class BTestController < ExposureTestController
+  exposes :z
+
+  def baz
+    expose :z, "z"
+    render :inline => "<%= z %>"
+  end
+end
+
 class ExposureTestApp < Rails::Application
   routes.draw do
     match ":action" => ExposureTestController
     match "other/:action" => OtherExposureTestController
+    match "a/:action" => ATestController
+    match "b/:action" => BTestController
   end
 
   config.session_store :disabled
@@ -85,5 +105,13 @@ class ExposureTest < NeoRailsCase
   test "exposes vars in subclass" do
     get "other/bar"
     assert_equal "a;b;c", last_response.body
+  end
+
+  test "exposes var in subclass parallel" do
+    get "a/baz"
+    assert_equal "z", last_response.body
+
+    get "b/baz"
+    assert_equal "z", last_response.body
   end
 end

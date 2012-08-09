@@ -17,7 +17,7 @@ module Neo
       module ClassMethods
         # Defines the variables to be exposed.
         def exposes(*names)
-          exposures = names.map(&:to_sym).reject { |name| exposed_vars.include?(name) }
+          exposures = names.map(&:to_sym)
           self.exposed_vars.merge exposures
           attr_reader *exposures
           helper_method *exposures
