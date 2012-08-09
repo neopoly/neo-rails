@@ -63,7 +63,7 @@ In app/assets/stylesheets/application.css:
 
 In app/assets/javascript/application.js
 
-  //= require neo-rails
+    //= require neo-rails
 
 In app/layouts/application.html.erb
 
