@@ -1,8 +1,72 @@
 .neo-rails-scenarios-list
   position: absolute
-  right: 0
-  top: 0
-  width: 250px
-  padding: 5px
-  background: #AAFFAA
-  border: 2px solid green
+  z-index: 100
+  right: 5px
+  top: 5px
+  width: 350px
+  font: 13px/16px Helvetica, Verdana, Arial, sans-serif
+  border: 1px solid #ddd
+  background: #f5f5f5
+  -moz-box-shadow: 1px 1px 2px #888
+  -webkit-box-shadow: 1px 1px 2px #888
+  box-shadow: 1px 1px 2px #888
+
+  h2
+    margin: 0
+    padding: 5px
+    font-size: 14px
+    color: #999
+    display: block
+    cursor: pointer
+
+    .caret
+      display: inline-block
+      float: right
+      margin: 5px 5px 0 0
+      content: " "
+      border-top: 4px solid #000
+      border-right: 4px solid transparent
+      border-left: 4px solid transparent
+      opacity: 0.3
+      filter: alpha(opacity=30)
+
+  ul
+    list-style: none
+    margin: 0
+    padding: 0
+    display: none
+    background: #bdbdbd
+    background-image: linear-gradient(bottom, rgb(227, 224, 226) 15%, rgb(245, 245, 245) 56%)
+    background-image: -o-linear-gradient(bottom, rgb(227, 224, 226) 15%, rgb(245, 245, 245) 56%)
+    background-image: -moz-linear-gradient(bottom, rgb(227, 224, 226) 15%, rgb(245, 245, 245) 56%)
+    background-image: -webkit-linear-gradient(bottom, rgb(227, 224, 226) 15%, rgb(245, 245, 245) 56%)
+    background-image: -ms-linear-gradient(bottom, rgb(227, 224, 226) 15%, rgb(245, 245, 245) 56%)
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.15, rgb(227, 224, 226)), color-stop(0.56, rgb(245, 245, 245)))
+
+    a
+      display: block
+      line-height: 25px
+      padding: 0 5px
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+
+      &:link, &:visited
+        text-decoration: none
+        color: #333
+      &:hover
+        color: #111
+      &:active
+        color: #000
+    li:last-child a
+      border: none
+
+
+.neo-rails-scenarios-list-open
+  h2
+    border-bottom: 1px solid #ddd
+    .caret
+      border-top: none
+      border-right: 4px solid transparent
+      border-left: 4px solid transparent
+      border-bottom: 4px solid #000
+  ul
+    display: block
