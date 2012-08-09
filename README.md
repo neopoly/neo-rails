@@ -1,6 +1,11 @@
-# Neo::Rails
+# Neo::Rails [![Build Status](https://secure.travis-ci.org/neopoly/neo-rails.png?branch=master)](http://travis-ci.org/neopoly/neo-rails)
+`neo-rails` contains some tools helping us doing Rails.
 
-TODO: Write a gem description
+This gem includes:
+* Mocks
+* Presenters
+* Exposure
+* Scenarios
 
 ## Installation
 
