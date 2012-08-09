@@ -1,3 +1,4 @@
+require 'active_support/core_ext/class'
 require 'active_support/concern'
 
 module Neo
@@ -12,10 +13,10 @@ module Neo
 
       included do
         if self < Neo::Rails::Exposure
-          class_attribute :scenarios
-          self.scenarios = Hash.new { |hash, action| hash[action] = {} }
-          before_filter :apply_scenario
-          helper_method :list_scenarios
+          cattr_accessor :scenarios
+          self.scenarios = List.new
+          prepend_before_filter :apply_scenario
+          helper_method :scenarios
         else
           raise ExposureMustBeIncludedFirst
         end
@@ -44,15 +45,16 @@ module Neo
         # Raises DuplicatedScenario if there is already a scenario for the action with the same name
         #
         def scenario(action, name, options={}, &block)
-          scenario = Scenario.new(action, name, block, options)
-
-          raise DuplicatedScenario if self.scenarios[scenario.action][scenario.name]
-
-          self.scenarios[scenario.action][scenario.name] = scenario
+          scenario = Scenario.new(self, action, name, block, options)
+          scenarios << scenario
         end
 
-        def list_scenarios
-          self.scenarios.values.map(&:values).flatten
+        def scenarios(&block)
+          if block
+            scenarios.define(&block)
+          else
+            self.scenarios
+          end
         end
       end
 
@@ -66,20 +68,15 @@ module Neo
         end
       end
 
-      # List all defined scenarios
-      #
-      # Return an Array of +scenario+ objects
-      def list_scenarios
-        self.class.list_scenarios
+      def scenarios
+        self.class.scenarios
       end
 
     protected
 
       # Applies a scenario as a before filter if there is one which fits.
       def apply_scenario
-        action_key   = params[:action].to_sym
-        scenario_key = params[:scenario].try(:to_sym)
-        if scenario_key && (scenario = self.class.scenarios[action_key][scenario_key])
+        if scenario = self.class.scenarios.find(controller_name, params[:action], params[:scenario])
           instance_eval(&scenario.block)
         end
       end
@@ -87,26 +84,6 @@ module Neo
       # Does this controller run a scenario right now?
       def scenario?
         params[:scenario]
-      end
-
-      # A simple class encapsulating a scenario:
-      # * the corresponding action
-      # * the scenario's name
-      # * an humanized name as label
-      # * the blocked which will be called when applying a scenario
-      class Scenario
-        attr_reader :action, :name, :block, :options
-
-        def initialize(action, name, block, options)
-          @action   = action.to_sym
-          @name     = name.to_sym
-          @block    = block
-          @options  = options
-        end
-
-        def label
-          "#{@action.to_s.humanize} -> #{@name.to_s.humanize}"
-        end
       end
     end
   end
