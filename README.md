@@ -27,30 +27,33 @@ Or install it yourself as:
 
 In app/presenters/presenter.rb
 
-    class Presenter
-      include Neo::Rails::Presenter
-    end
+```ruby
+class Presenter
+  include Neo::Rails::Presenter
+end
 
+class UserPresenter < Presenter
+  def initialize(user)
+    @user = user
+  end
 
-    class UserPresenter < Presenter
-      def initialize(user)
-        @user = user
-      end
+  def name
+    @user.name
+  end
 
-      def name
-        @user.name
-      end
-
-      def profile_path
-        view_context.link_to view_context.user_profile_path(@user), name
-      end
-    end
+  def profile_path
+    view_context.link_to view_context.user_profile_path(@user), name
+  end
+end
+```
 
 In test/test_helper.rb
 
-    require 'neo/rails/presenter/test_helper'
+```ruby
+require 'neo/rails/presenter/test_helper'
 
-    Neo::Rails::Presenter::TestHelper.setup
+Neo::Rails::Presenter::TestHelper.setup
+```
 
 ### Scenarios
 
