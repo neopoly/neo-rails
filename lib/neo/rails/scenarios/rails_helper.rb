@@ -9,8 +9,9 @@ module Neo
         def render_scenarios_list
           if ::Rails.env.development? && respond_to?(:list_scenarios) && (list = list_scenarios).any?
             scenario_links = list.map { |scenario| content_tag(:li, scenario_link(scenario)) }
-            ul = content_tag(:ul, scenario_links.join.html_safe)
-            raw content_tag(:div, ul, :class => "neo-rails-scenarios-list")
+            ul    = content_tag(:ul, scenario_links.join.html_safe)
+            title = content_tag(:h2, "Scenarios".html_safe + content_tag(:span, "", :class => "caret"))
+            content_tag(:div, title+ul, :class => "neo-rails-scenarios-list")
           end
         end
       end

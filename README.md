@@ -59,11 +59,15 @@ Neo::Rails::Presenter::TestHelper.setup
 
 In app/assets/stylesheets/application.css:
 
+    /*= require neo-rails */
+
+In app/assets/javascript/application.js
+
     //= require neo-rails
 
-In app/layouts/application.html.haml
+In app/layouts/application.html.erb
 
-    = render_scenarios_list
+    <%= render_scenarios_list %>
 
 ## Contributing
 
