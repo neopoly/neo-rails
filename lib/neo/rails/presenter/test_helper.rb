@@ -11,6 +11,7 @@ module Neo
           include Singleton
           include ActionView::Helpers::TagHelper
           include ActionView::Helpers::UrlHelper
+          include ActionView::Helpers::TranslationHelper
           include Sprockets::Helpers::RailsHelper
           include Sprockets::Helpers::IsolatedHelper
           include ::Rails.application.routes.url_helpers
