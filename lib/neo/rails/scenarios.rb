@@ -108,9 +108,6 @@ module Neo
           @options  = options
         end
 
-        def link
-          link_to label, url_for(:action => action, :scenario => name, :id => 1), options
-        end
       end
     end
   end
