@@ -1,12 +1,11 @@
 module Neo
   module Rails
     class Engine < ::Rails::Engine
-      initializer "neo-rails.scenarios_helpers" do
-        require 'neo/rails/scenarios/rails_helper'
 
-        ActiveSupport.on_load(:action_view) do
-          include Neo::Rails::Scenarios::RailsHelper
-        end
+      initializer "neo-rails.scenario_middleware" do |app|
+        require 'neo/rails/scenarios/middleware'
+
+        app.middleware.use Neo::Rails::Scenarios::Middleware
       end
 
       initializer "neo-rails.presenter_method" do

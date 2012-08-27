@@ -1,5 +1,4 @@
 require 'active_support/concern'
-
 module Neo
   module Rails
     # Enables controller actions to have scenarios, which will be applied
@@ -9,6 +8,9 @@ module Neo
 
       class DuplicatedScenario < StandardError; end
       class ExposureMustBeIncludedFirst < StandardError; end
+      autoload :ScenarioPresenter, 'neo/rails/scenarios/scenario_presenter'
+
+      ENV_KEY = 'neo.rails.scenarios_list'
 
       included do
         if self < Neo::Rails::Exposure
@@ -77,10 +79,13 @@ module Neo
 
       # Applies a scenario as a before filter if there is one which fits.
       def apply_scenario
-        action_key   = params[:action].to_sym
-        scenario_key = params[:scenario].try(:to_sym)
-        if scenario_key && (scenario = self.class.scenarios[action_key][scenario_key])
-          instance_eval(&scenario.block)
+        if ::Rails.env.development? || ::Rails.env.test?
+          request.env[ENV_KEY] = list_scenarios.map{|s| ScenarioPresenter.new(s)} # TODO find a better way to expose the scenarios to middleware
+          action_key   = params[:action].to_sym
+          scenario_key = params[:scenario].try(:to_sym)
+          if scenario_key && (scenario = self.class.scenarios[action_key][scenario_key])
+            instance_eval(&scenario.block)
+          end
         end
       end
 
@@ -92,7 +97,6 @@ module Neo
       # A simple class encapsulating a scenario:
       # * the corresponding action
       # * the scenario's name
-      # * an humanized name as label
       # * the blocked which will be called when applying a scenario
       class Scenario
         attr_reader :action, :name, :block, :options
@@ -104,8 +108,8 @@ module Neo
           @options  = options
         end
 
-        def label
-          "#{@action.to_s.humanize} -> #{@name.to_s.humanize}"
+        def link
+          link_to label, url_for(:action => action, :scenario => name, :id => 1), options
         end
       end
     end
