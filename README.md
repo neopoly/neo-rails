@@ -57,17 +57,44 @@ Neo::Rails::Presenter::TestHelper.setup
 
 ### Scenarios
 
-In app/assets/stylesheets/application.css:
+Use scenarios to test different states of your views per action. You can use mocks to provide data and it is design to work with exposures. Exposures which are prefilled in the scenario description will be ignored when the action
+is executed. This works best when using blocks for exposures which will not be called:
 
-    /*= require neo-rails */
+```ruby
+class DummyController < ApplicationController
+  include Neo::Rails::Exposure
+  include Neo::Rails::Scenarios
 
-In app/assets/javascript/application.js
+  exposes :team
 
-    //= require neo-rails
+  def index
+    expose(:team) do
+      TeamPresenter.new(current_user.team) if current_user.team?
+    end
+  end
 
-In app/layouts/application.html.erb
+  scenario(:index, :without_team) do
+    expose :team, nil
+  end
 
-    <%= render_scenarios_list %>
+  scenario(:index, :with_team)  do
+    expose :team, TeamPresenter.new(TeamMock.new)
+  end
+end
+```
+
+When scenarios are available a list of them will be displayed in the browser when running in development mode, so you can design your views without real business data.
+
+You can test all your scenarios of one controller by using a test helper:
+
+```ruby
+require 'neo/rails/scenarios/test_helper'
+
+class DummyControllerTest < ActionController::TestCase
+  include Neo::Rails::Scenarios::TestHelper
+end
+```
+
 
 ## Contributing
 
