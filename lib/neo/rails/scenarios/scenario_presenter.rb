@@ -11,7 +11,7 @@ module Neo
         delegate :action, :name, :options, :to => :@scenario
 
         def label
-          "#{action.to_s.humanize} -> #{name.to_s.humanize}"
+          "#{action.to_s.humanize} &raquo; #{name.to_s.humanize}".html_safe
         end
 
         def link

@@ -22,11 +22,7 @@ module Neo
           end
 
           def response
-            if @scenarios && html?
-              inject! html_to_inject
-              inject! js_to_inject
-              inject! style_to_inject
-            end
+            inject! html_to_inject, js_to_inject, style_to_inject if @scenarios && html?
             [@status, @headers, @response]
           end
 
@@ -36,9 +32,9 @@ module Neo
             @headers['Content-Type'] && @headers['Content-Type'].to_s.include?('text/html')
           end
 
-          def inject!(content, marker = %r(</body>))
+          def inject!(*contents)
             @response.each do |fragment|
-              fragment.gsub! marker, "#{content}</body>"
+              fragment.gsub! %r(</body>), contents.join
             end
           end
 

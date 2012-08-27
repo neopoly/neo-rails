@@ -15,6 +15,8 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = Neo::Rails::VERSION
 
+  gem.add_dependency "sass", "~> 3.1"
+
   gem.add_development_dependency "rake"
   gem.add_development_dependency "minitest"
   gem.add_development_dependency "rails", "~> 3.2.7"
