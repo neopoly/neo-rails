@@ -12,6 +12,7 @@ module Neo
           include ActionView::Helpers::TagHelper
           include ActionView::Helpers::UrlHelper
           include ActionView::Helpers::TranslationHelper
+          include ActionView::Helpers::NumberHelper
           include Sprockets::Helpers::RailsHelper
           include Sprockets::Helpers::IsolatedHelper
           include ::Rails.application.routes.url_helpers
