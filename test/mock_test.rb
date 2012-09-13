@@ -30,4 +30,21 @@ class MockTest < NeoRailsCase
       refute mock.mock.tagged?(:bar)
     end
   end
+
+  context :options do
+    let(:mock) { Neo::Rails::Mock.new(:tag, :opt => true, "string" => :yes) }
+
+    test "passes options" do
+      assert_equal true, mock.mock.option(:opt)
+      assert_equal :yes, mock.mock.option("string")
+
+      refute mock.mock.option("opt")
+      refute mock.mock.option(:unknown)
+    end
+
+    test "is tagged" do
+      assert mock.mock.tagged?(:tag)
+      assert_equal "Tag", mock.mock.description
+    end
+  end
 end
