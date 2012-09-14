@@ -31,6 +31,36 @@ class MockTest < NeoRailsCase
     end
   end
 
+  context :tag do
+    let(:mock) { Neo::Rails::Mock.new }
+
+    test "add tags" do
+      mock.mock.tag(:foo, :bar)
+      assert mock.mock.tagged?(:foo)
+      assert mock.mock.tagged?(:bar)
+    end
+
+    test "add tag uniquely" do
+      mock.mock.tag(:foo, :foo)
+      assert_equal [ :foo ], mock.mock.tags
+    end
+  end
+
+  context :untag do
+    let(:mock) { Neo::Rails::Mock.new(:foo, :bar) }
+
+    test "remove tags" do
+      mock.mock.untag(:bar, :foo)
+      refute mock.mock.tagged?(:foo)
+      refute mock.mock.tagged?(:bar)
+    end
+
+    test "remove unset tag works" do
+      refute mock.mock.tagged?(:nottagged)
+      mock.mock.untag(:nottagged)
+    end
+  end
+
   context :options do
     let(:mock) { Neo::Rails::Mock.new(:tag, :opt => true, "string" => :yes) }
 

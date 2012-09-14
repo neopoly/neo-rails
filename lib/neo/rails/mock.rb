@@ -56,13 +56,27 @@ module Neo
 
       class MockConfig
         def initialize(tags, options={})
-          @tags     = tags
+          @tags     = Set.new(tags)
           @options  = options
         end
 
         # Returns a human readable tag list.
         def description
-          @tags.to_a.map { |tag| tag.to_s.capitalize }.join(", ")
+          @tags.map { |tag| tag.to_s.capitalize }.join(", ")
+        end
+
+        def tags
+          @tags.to_a
+        end
+
+        # Tag mock with +tags+.
+        def tag(*tags)
+          tags.each { |tag| @tags << tag }
+        end
+
+        # Untag mock.
+        def untag(*tags)
+          tags.each { |tag| @tags.delete(tag) }
         end
 
         # Checks if this mock is tagged with +tag+.
