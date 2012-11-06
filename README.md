@@ -21,6 +21,10 @@ Or install it yourself as:
 
     $ gem install neo-rails
 
+You can generate base classes for your presenters and mocks with
+
+    $ rake neo-rails:setup
+
 ## Usage
 
 ### Presenter
