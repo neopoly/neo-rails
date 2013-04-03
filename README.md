@@ -73,6 +73,13 @@ In app/layouts/application.html.erb
 
     <%= render_scenarios_list %>
 
+### Testing
+
+    rm -f Gemfile.lock
+    export RAILS_VERSION=3.2 # or 4.0
+    bundle
+    bundle exec rake
+
 ## Contributing
 
 1. Fork it

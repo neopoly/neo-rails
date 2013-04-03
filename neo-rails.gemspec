@@ -17,7 +17,6 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency "rake"
   gem.add_development_dependency "minitest"
-  gem.add_development_dependency "rails", "~> 3.2.7"
   gem.add_development_dependency "rack-test"
   gem.add_development_dependency "simplecov"
 end

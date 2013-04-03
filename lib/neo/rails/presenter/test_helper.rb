@@ -13,8 +13,12 @@ module Neo
           include ActionView::Helpers::UrlHelper
           include ActionView::Helpers::TranslationHelper
           include ActionView::Helpers::NumberHelper
-          include Sprockets::Helpers::RailsHelper
-          include Sprockets::Helpers::IsolatedHelper
+          begin
+            include Sprockets::Rails::Helper
+          rescue LoadError
+            include Sprockets::Helpers::RailsHelper
+            include Sprockets::Helpers::IsolatedHelper
+          end
           include ::Rails.application.routes.url_helpers
 
           attr_accessor :output_buffer
