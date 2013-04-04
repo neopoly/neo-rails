@@ -67,12 +67,14 @@ end
 
 class ExposureTestApp < Rails::Application
   routes.draw do
-    match ":action" => ExposureTestController
-    match "other/:action" => OtherExposureTestController
-    match "a/:action" => ATestController
-    match "b/:action" => BTestController
+    get ":action" => ExposureTestController
+    get "other/:action" => OtherExposureTestController
+    get "a/:action" => ATestController
+    get "b/:action" => BTestController
   end
 
+  config.secret_key_base = "a" * 32
+  config.secret_token = "a" * 32
   config.session_store :disabled
   config.middleware.delete Rails::Rack::Logger
   config.middleware.delete ActionDispatch::ShowExceptions
