@@ -42,7 +42,7 @@ module Neo
       private
 
       def exposed?(name)
-        instance_variable_get("@#{name}")
+        instance_variable_defined?("@#{name}")
       end
     end
   end
