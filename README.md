@@ -80,6 +80,10 @@ In app/layouts/application.html.erb
     bundle
     bundle exec rake
 
+## TODO
+
+* Test scenarios!
+
 ## Contributing
 
 1. Fork it
