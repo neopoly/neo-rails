@@ -30,6 +30,11 @@ class ExposureTestController < ActionController::Base
   def expose_with_error
     expose(:unknown) { "unknown" }
   end
+
+  def expose_nil_value
+    expose(:a) { nil }
+    render :inline => [ exposed?(:a), exposed?(:b) ].inspect
+  end
 end
 
 class OtherExposureTestController < ExposureTestController
@@ -102,6 +107,11 @@ class ExposureTest < NeoRailsCase
     assert_raises Neo::Rails::Exposure::UndeclaredVariableError do
       get :expose_with_error
     end
+  end
+
+  test "exposes nil value" do
+    get :expose_nil_value
+    assert_equal [ true, false ].inspect, last_response.body
   end
 
   test "exposes vars in subclass" do
