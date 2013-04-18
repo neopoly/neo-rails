@@ -1,4 +1,7 @@
-# Neo::Rails [![Build Status](https://secure.travis-ci.org/neopoly/neo-rails.png?branch=master)](http://travis-ci.org/neopoly/neo-rails)
+# Neo::Rails
+
+[![Build Status](https://secure.travis-ci.org/neopoly/neo-rails.png?branch=master)](http://travis-ci.org/neopoly/neo-rails) [![Gem Version](https://badge.fury.io/rb/neo-rails.png)](http://badge.fury.io/rb/neo-rails) [![Code Climate](https://codeclimate.com/github/neopoly/neo-rails.png)](https://codeclimate.com/github/neopoly/neo-rails)
+
 `neo-rails` contains some tools helping us doing Rails.
 
 This gem includes:
