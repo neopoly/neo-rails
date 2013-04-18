@@ -15,7 +15,7 @@ module Neo
           include ActionView::Helpers::NumberHelper
           begin
             include Sprockets::Rails::Helper
-          rescue LoadError
+          rescue NameError
             include Sprockets::Helpers::RailsHelper
             include Sprockets::Helpers::IsolatedHelper
           end
