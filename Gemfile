@@ -6,7 +6,7 @@ gemspec
 rails_version = ENV['RAILS_VERSION']
 case rails_version
 when '4.0'
-  gem 'rails', '4.0.0.beta1'
+  gem 'rails', '4.0.0.rc1'
 when '3.2'
   gem 'rails', '~> 3.2.13'
 when NilClass
