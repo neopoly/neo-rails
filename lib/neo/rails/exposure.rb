@@ -1,4 +1,5 @@
 require 'active_support/concern'
+require 'neo/rails/exposure/exposures'
 
 module Neo
   module Rails
@@ -7,20 +8,30 @@ module Neo
     module Exposure
       extend ActiveSupport::Concern
 
-      class UndeclaredVariableError < StandardError; end
-
       included do
-        class_attribute :exposed_vars
-        self.exposed_vars ||= Set.new
+        class_attribute :exposure_names
+        self.exposure_names ||= Set.new
+      end
+
+      def exposures
+        @exposures ||= Exposures.new(self.class.exposure_names)
       end
 
       module ClassMethods
         # Defines the variables to be exposed.
         def exposes(*names)
-          exposures = names.map(&:to_sym)
-          self.exposed_vars.merge exposures
-          attr_reader *exposures
-          helper_method *exposures
+          exposure_names = names.map(&:to_sym)
+          self.exposure_names.merge exposure_names
+
+          # Define a helper method for each exposure
+          exposure_names.each do |exposure_name|
+            # see Rails: /actionpack/lib/abstract_controller/helpers.rb
+            helper do
+              define_method exposure_name do
+                controller.exposures[exposure_name]
+              end
+            end
+          end
         end
       end
 
@@ -32,17 +43,14 @@ module Neo
       # Raise UndeclaredVariableError if access variable wasn't declared before.
       def expose(key, value=nil)
         name = key.to_sym
-        raise UndeclaredVariableError unless self.class.exposed_vars.include?(name)
-
         value = yield if block_given?
-
-        self.instance_variable_set("@#{name}", value)
+        self.exposures[key] = value
       end
 
       private
 
-      def exposed?(name)
-        instance_variable_defined?("@#{name}")
+      def exposed?(key)
+        self.exposures.exposed?(key)
       end
     end
   end
