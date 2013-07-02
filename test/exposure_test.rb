@@ -18,13 +18,20 @@ class ExposureTestController < ActionController::Base
   def expose_via_value
     expose :a, "a"
     expose :b, "b"
-    render :inline => %{ar=#{a},ah=<%= a %>,br=#{b},bh=<%= b %>}
+    render :inline => %{ar=#{exposures.a},ah=<%= a %>,br=#{exposures.b},bh=<%= b %>}
   end
 
   def expose_via_block
     expose(:a) { "a" }
     expose(:b) { "b" }
-    render :inline => %{ar=#{a},ah=<%= a %>,br=#{b},bh=<%= b %>}
+    render :inline => %{ar=#{exposures.a},ah=<%= a %>,br=#{exposures.b},bh=<%= b %>}
+  end
+
+  def exposes_via_value_with_template
+    expose(:a, "a")
+    expose(:b) { "b" }
+    template = File.expand_path(File.join("..", "fixtures", "views", "exposes_via_value_with_template"), __FILE__)
+    render :file => template
   end
 
   def expose_with_error
@@ -102,6 +109,12 @@ class ExposureTest < NeoRailsCase
     get :expose_via_block
     assert_equal "ar=a,ah=a,br=b,bh=b", last_response.body
   end
+
+  test "should expose variable per value with template" do
+    get :exposes_via_value_with_template
+    assert_equal "ah=a,bh=b", last_response.body
+  end
+
 
   test "should raise an error when exposing an undeclared variable" do
     assert_raises Neo::Rails::Exposure::UndeclaredVariableError do
