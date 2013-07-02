@@ -24,9 +24,9 @@ module Neo
           self.exposure_names.merge exposure_names
 
           # Define a helper method for each exposure
-          exposure_names.each do |exposure_name|
-            # see Rails: /actionpack/lib/abstract_controller/helpers.rb
-            helper do
+          # see Rails: /actionpack/lib/abstract_controller/helpers.rb
+          helper do
+            exposure_names.each do |exposure_name|
               define_method exposure_name do
                 controller.exposures[exposure_name]
               end
