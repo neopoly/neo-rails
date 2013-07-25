@@ -30,6 +30,18 @@ You can generate base classes for your presenters and mocks with
 
 ## Usage
 
+### Generators
+Create files and tests...
+
+Example 'User':
+```ruby
+rails g presenter User
+```
+```ruby
+rails g mock User
+```
+
+
 ### Presenter
 
 In app/presenters/presenter.rb
