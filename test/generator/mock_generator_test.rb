@@ -1,11 +1,8 @@
 require 'helper'
-require 'rails/generators'
 require 'generators/mock/mock_generator'
 
-class MockGeneratorTest < Rails::Generators::TestCase
+class MockGeneratorTest < GeneratorCase
   tests MockGenerator
-  destination File.expand_path("../tmp", File.dirname(__FILE__))
-  setup :prepare_destination
 
   test "create mock" do
     run_generator %w(test)

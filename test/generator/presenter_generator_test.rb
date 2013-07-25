@@ -1,11 +1,8 @@
 require 'helper'
-require 'rails/generators'
 require 'generators/presenter/presenter_generator'
 
-class PresenterGeneratorTest < Rails::Generators::TestCase
+class PresenterGeneratorTest < GeneratorCase
   tests PresenterGenerator
-  destination File.expand_path("../tmp", File.dirname(__FILE__))
-  setup :prepare_destination
 
   test "create presenter" do
     run_generator %w(test)
@@ -22,7 +19,7 @@ class PresenterGeneratorTest < Rails::Generators::TestCase
     run_generator %w(test)
     
     assert_file "test/presenters/test_presenter_test.rb" do |presenter_test|
-      assert_match(/#require 'test_helper'/, presenter_test)
+      assert_match(/require 'test_helper'/, presenter_test)
       assert_match(/class TestPresenterTest < ActiveSupport::TestCase/, presenter_test)
     end
   end
