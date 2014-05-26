@@ -25,12 +25,11 @@ module Neo
 
           # Define a helper method for each exposure
           # see Rails: /actionpack/lib/abstract_controller/helpers.rb
-          helper do
-            exposure_names.each do |exposure_name|
-              define_method exposure_name do
-                controller.exposures[exposure_name]
-              end
+          exposure_names.each do |exposure_name|
+            define_method exposure_name do
+              self.exposures[exposure_name]
             end
+            self.helper_method exposure_name
           end
         end
       end

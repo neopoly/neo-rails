@@ -18,6 +18,8 @@ Gem::Specification.new do |gem|
   gem.version       = Neo::Rails::VERSION
 
   case rails_version
+    when '4.1'
+      gem.add_development_dependency "minitest", '~> 5.1'
     when '4.0'
       gem.add_development_dependency "minitest"
     when '3.2'
