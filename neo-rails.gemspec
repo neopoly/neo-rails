@@ -18,18 +18,14 @@ Gem::Specification.new do |gem|
   gem.version       = Neo::Rails::VERSION
 
   case rails_version
-    when '4.1.6'
-      gem.add_development_dependency "minitest", '~> 5.4'
-    when '4.1'
-      gem.add_development_dependency "minitest", '~> 5.1'
-    when '4.0'
-      gem.add_development_dependency "minitest"
-    when '3.2'
-      gem.add_development_dependency "minitest", '~> 4.7'
-    when NilClass
-      abort "Missing env RAILS_VERSION"
-    else
-      abort "Rails version #{rails_version.inspect} not supported"
+  when '3.2'
+    gem.add_development_dependency "minitest", '~> 4.7'
+  when /.*/
+    gem.add_development_dependency "minitest"
+  when NilClass
+    abort "Missing env RAILS_VERSION"
+  else
+    abort "Rails version #{rails_version.inspect} not supported"
   end
 
   gem.add_development_dependency "rake"
