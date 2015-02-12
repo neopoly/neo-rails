@@ -18,3 +18,7 @@ when NilClass
 else
   abort "Rails version #{rails_version.inspect} not supported"
 end
+
+if ENV['CODECLIMATE_REPO_TOKEN']
+  gem "codeclimate-test-reporter", :group => :test, :require => nil
+end
