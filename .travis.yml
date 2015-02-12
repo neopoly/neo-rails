@@ -2,18 +2,14 @@ language: ruby
 sudo: false
 cache: bundler
 rvm:
-  - ruby-head
+# - ruby-head (see as below)
 # - 2.2 skip for now. See https://travis-ci.org/neopoly/neo-rails/jobs/50484846
   - 2.1
   - 2.0
   - 1.9.3
-  - jruby-head
-  - jruby
-  - jruby-19mode
 env:
   global:
     - CODECLIMATE_REPO_TOKEN=f88e6216112f3039c2ceb879c813ad95b99e4ac13413a7fc104dc176eb7c63bb
-    - JRUBY_OPTS='--dev -J-Xmx1024M'
   matrix:
     - RAILS_VERSION=3.2
     - RAILS_VERSION=4.0
@@ -21,8 +17,6 @@ env:
     - RAILS_VERSION=4.2
 matrix:
   allow_failures:
-    - rvm: ruby-head
-    - rvm: jruby-head
   fast_finish: true
 notifications:
   webhooks:
