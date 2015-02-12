@@ -7,16 +7,19 @@ rvm:
   - 2.1
   - 2.0
   - 1.9.3
+  - jruby-head
+  - jruby
   - jruby-19mode
-env:
-  - RAILS_VERSION=3.2
-  - RAILS_VERSION=4.0
 env:
   global:
     - CODECLIMATE_REPO_TOKEN=f88e6216112f3039c2ceb879c813ad95b99e4ac13413a7fc104dc176eb7c63bb
+    - JRUBY_OPTS='--dev -J-Xmx1024M'
+  - RAILS_VERSION=3.2
+  - RAILS_VERSION=4.0
 matrix:
   allow_failures:
     - rvm: ruby-head
+    - rvm: jruby-head
 notifications:
   webhooks:
     urls:
