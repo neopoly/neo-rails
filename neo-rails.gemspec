@@ -17,6 +17,8 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = Neo::Rails::VERSION
 
+  gem.add_dependency "view_model-rails"
+
   case rails_version
   when '3.2'
     gem.add_development_dependency "minitest", '~> 4.7'

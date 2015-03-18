@@ -1,7 +1,7 @@
 namespace :"neo-rails" do
   desc "standard tasks for a new application"
   task :setup do
-    ["build:presenter", "build:mock"].each do |task|
+    ["build:presenter", "build:mock", "build:view_model"].each do |task|
       Rake::Task["neo-rails:#{task}"].invoke
     end
   end
@@ -22,6 +22,14 @@ namespace :"neo-rails" do
     desc "build application base mock"
     task :mock do
       copy_from_template "app/mocks/mock.rb"
+    end
+
+    desc "build application base view model"
+    task :view_model do
+      spec = Gem::Specification.find_by_name 'view_model-rails'
+      load "#{spec.gem_dir}/lib/tasks/view_model_tasks.rake"
+
+      Rake::Task["view_model:setup"].invoke
     end
   end
 end
