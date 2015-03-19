@@ -22,6 +22,7 @@
 This gem includes:
 * Mocks
 * Presenters
+* View Models
 * Exposure
 * Scenarios
 
@@ -39,7 +40,7 @@ Or install it yourself as:
 
     $ gem install neo-rails
 
-You can generate base classes for your presenters and mocks with
+You can generate base classes for your presenters, mocks and view models with
 
     $ rake neo-rails:setup
 
@@ -54,6 +55,9 @@ rails g presenter User
 ```
 ```ruby
 rails g mock User
+```
+```ruby
+rails g view_model UserProfile
 ```
 
 
