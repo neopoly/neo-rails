@@ -93,6 +93,34 @@ require 'neo/rails/presenter/test_helper'
 Neo::Rails::Presenter::TestHelper.setup
 ```
 
+### Exposures
+
+In app/controllers/pages_controller.rb
+
+```ruby
+class PagesController < ApplicationController
+  include Neo::Rails::Exposure
+  
+  exposes :title, :description
+  
+  def faq
+    expose :title, "A title"
+    expose :description, "A description"
+  end
+end
+```
+
+In app/views/pages/faq.html.erb
+
+```erb
+<div class="title">
+  <%= title %>
+</div>
+<div class="description">
+  <%= description %>
+</div>
+```
+
 ### Scenarios
 
 In app/assets/stylesheets/application.css:
