@@ -18,6 +18,7 @@ Gem::Specification.new do |gem|
   gem.version       = Neo::Rails::VERSION
 
   gem.add_dependency "view_model-rails"
+  gem.add_dependency "mime-types", "~> 2.0"
 
   case rails_version
   when '3.2'
