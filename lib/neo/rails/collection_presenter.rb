@@ -25,6 +25,8 @@ module Neo
 
       module ClassMethods
         def build(objects)
+          presenter_class = build_presenter_class
+
           presenters = objects.map do |object|
             presenter_class.new(object)
           end
@@ -34,7 +36,7 @@ module Neo
 
         private
 
-        def presenter_class
+        def build_presenter_class
           [module_namespace, presenter_class_name].join('::').constantize
         end
 
