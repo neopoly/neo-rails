@@ -61,7 +61,7 @@ rails g view_model UserProfile
 ```
 
 
-### Presenter
+### Presenters
 
 In app/presenters/presenter.rb
 
@@ -91,6 +91,24 @@ In test/test_helper.rb
 require 'neo/rails/presenter/test_helper'
 
 Neo::Rails::Presenter::TestHelper.setup
+```
+
+#### Collection Presenters
+
+A collection presenter wraps models into presenters with a matching name.
+So a `ProfileCollectionPresenter` will wrap a profile model into a `ProfilePresenter`.
+
+The collection presenter itself has access to the view_context just like any other presenter.
+
+Example:
+
+```ruby
+class ProfileCollectionPresenter
+  include Neo::Rails::CollectionPresenter
+end
+
+profile_models = [Struct.new(:name).new('John')]
+profile_presenters = ProfileCollectionPresenter.build(profile_models)
 ```
 
 ### Exposures
