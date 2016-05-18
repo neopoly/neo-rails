@@ -21,7 +21,7 @@ module Neo
           end
           include ::Rails.application.routes.url_helpers
 
-          attr_accessor :output_buffer
+          attr_accessor :output_buffer, :params, :controller
         end
       end
     end
