@@ -101,29 +101,29 @@ class ExposureTest < NeoRailsCase
   end
 
   test "should expose variable per value" do
-    get :expose_via_value
+    get "expose_via_value"
     assert_equal "ar=a,ah=a,br=b,bh=b", last_response.body
   end
 
   test "should expose variable per block" do
-    get :expose_via_block
+    get "expose_via_block"
     assert_equal "ar=a,ah=a,br=b,bh=b", last_response.body
   end
 
   test "should expose variable per value with template" do
-    get :exposes_via_value_with_template
+    get "exposes_via_value_with_template"
     assert_equal "ah=a,bh=b", last_response.body
   end
 
 
   test "should raise an error when exposing an undeclared variable" do
     assert_raises Neo::Rails::Exposure::UndeclaredVariableError do
-      get :expose_with_error
+      get "expose_with_error"
     end
   end
 
   test "exposes nil value" do
-    get :expose_nil_value
+    get "expose_nil_value"
     assert_equal [ true, false ].inspect, last_response.body
   end
 

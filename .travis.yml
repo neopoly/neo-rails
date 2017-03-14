@@ -3,7 +3,7 @@ sudo: false
 cache: bundler
 rvm:
 # - ruby-head (see as below)
-# - 2.2 skip for now. See https://travis-ci.org/neopoly/neo-rails/jobs/50484846
+  - 2.2
   - 2.1
   - 2.0
   - 1.9.3
