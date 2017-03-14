@@ -19,6 +19,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "view_model-rails"
   gem.add_dependency "mime-types", ['>= 1.0', '< 3.0']
+  gem.add_dependency "nokogiri", '~> 1.6.8'
 
   case rails_version
   when '3.2'
