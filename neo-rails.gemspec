@@ -23,6 +23,7 @@ Gem::Specification.new do |gem|
   case rails_version
   when '3.2'
     gem.add_development_dependency "minitest", '~> 4.7'
+    gem.add_development_dependency 'test-unit', '~> 3.0'
   when /.*/
     gem.add_development_dependency "minitest"
   when NilClass
