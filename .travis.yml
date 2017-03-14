@@ -3,6 +3,8 @@ sudo: false
 cache: bundler
 rvm:
 # - ruby-head (see as below)
+  - 2.4
+  - 2.3
   - 2.2
   - 2.1
   - 2.0
@@ -15,6 +17,7 @@ env:
     - RAILS_VERSION=4.0
     - RAILS_VERSION=4.1
     - RAILS_VERSION=4.2
+    - RAILS_VERSION=5.0
 matrix:
   allow_failures:
   fast_finish: true
