@@ -6,7 +6,7 @@ class MockGenerator < Rails::Generators::NamedBase
 
   def create_mock_file
     path = "app/mocks/#{file_name}_mock.rb"
-    if FileTest.exists?path
+    if FileTest.exist? path
       raise FileExistError, "This filename ist used by another mock:#{path}"
     end
 

@@ -6,7 +6,7 @@ class PresenterGenerator < Rails::Generators::NamedBase
 
   def create_presenter_file
     path = "app/presenters/#{file_name}_presenter.rb"
-    if FileTest.exists?path
+    if FileTest.exist? path
       raise FileExistError, "This filename ist used by another presenter:#{path}"
     end
 
@@ -17,7 +17,7 @@ class PresenterGenerator < Rails::Generators::NamedBase
 
   def create_presenter_test_file
     path = "test/presenters/#{file_name}_presenter_test.rb"
-    if FileTest.exists?path
+    if FileTest.exist? path
       raise FileExistError, "This filename ist used by another PresenterTest:#{path}"
     end
 
@@ -25,7 +25,7 @@ class PresenterGenerator < Rails::Generators::NamedBase
     replace_class_name path
   end
 
-  private 
+  private
   def replace_class_name path
     gsub_file path, '-classname-' , "#{class_name}"
   end
@@ -33,7 +33,7 @@ class PresenterGenerator < Rails::Generators::NamedBase
   def replace_singular_name path
     gsub_file path, 'singular_name' , "#{plural_name.singularize}"
   end
-  
+
 end
 
 class FileExistError < StandardError; end
