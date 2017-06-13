@@ -11,10 +11,6 @@ class ExposureTestController < ActionController::Base
 
   exposes :a, :b
 
-  def foo
-    render :text => "bar"
-  end
-
   def expose_via_value
     expose :a, "a"
     expose :b, "b"
