@@ -30,7 +30,7 @@ This gem includes:
 
 Add this line to your application's Gemfile:
 
-    gem 'neo-rails'
+    gem 'neo-rails', '~> 0.3.2'
 
 And then execute:
 
@@ -153,3 +153,15 @@ In app/layouts/application.html.erb
 3. Commit your changes (`git commit -am 'Added some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+## Release
+
+Follow these steps to release this gem:
+
+    # Bump version in
+    edit lib/neo/rails/version.rb
+    edit README.md
+
+    git commit -m "Release X.Y.Z"
+
+    rake release
