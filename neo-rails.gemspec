@@ -1,8 +1,6 @@
 # -*- encoding: utf-8 -*-
 require File.expand_path('../lib/neo/rails/version', __FILE__)
 
-rails_version = ENV['RAILS_VERSION']
-
 Gem::Specification.new do |gem|
   gem.authors       = ["Jonas Thiel", "Peter Suschlik"]
   gem.email         = ["jt@neopoly.de", "ps@neopoly.de"]
@@ -21,16 +19,12 @@ Gem::Specification.new do |gem|
   gem.add_dependency "mime-types", ['>= 1.0', '< 3.0']
   gem.add_dependency "nokogiri", '~> 1.6.8'
 
-  case rails_version
+  case ENV['RAILS_VERSION']
   when '3.2'
     gem.add_development_dependency "minitest", '~> 4.7'
     gem.add_development_dependency 'test-unit', '~> 3.0'
-  when /.*/
-    gem.add_development_dependency "minitest"
-  when NilClass
-    abort "Missing env RAILS_VERSION"
   else
-    abort "Rails version #{rails_version.inspect} not supported"
+    gem.add_development_dependency "minitest"
   end
 
   gem.add_development_dependency "rake"
