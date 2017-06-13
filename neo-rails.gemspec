@@ -16,8 +16,8 @@ Gem::Specification.new do |gem|
   gem.version       = Neo::Rails::VERSION
 
   gem.add_dependency "view_model-rails"
-  gem.add_dependency "mime-types", ['>= 1.0', '< 3.0']
-  gem.add_dependency "nokogiri", '~> 1.6.8'
+  gem.add_dependency "mime-types", '~> 3.1'
+  gem.add_dependency "nokogiri", '~> 1.8'
 
   case ENV['RAILS_VERSION']
   when '3.2'
