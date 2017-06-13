@@ -41,7 +41,6 @@ module Neo
       #
       # Raise UndeclaredVariableError if access variable wasn't declared before.
       def expose(key, value=nil)
-        name = key.to_sym
         value = yield if block_given?
         self.exposures[key] = value
       end
