@@ -79,10 +79,12 @@ end
 
 class ExposureTestApp < Rails::Application
   routes.draw do
-    get ":action" => ExposureTestController
-    get "other/:action" => OtherExposureTestController
-    get "a/:action" => ATestController
-    get "b/:action" => BTestController
+    ExposureTestController.action_methods.each do |action|
+      get action => "exposure_test##{action}"
+    end
+    get "other/bar" => "other_exposure_test#bar"
+    get "a/baz" => "a_test#baz"
+    get "b/baz" => "b_test#baz"
   end
 
   config.secret_key_base = "a" * 32
