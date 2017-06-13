@@ -1,7 +1,5 @@
-if ENV['CODECLIMATE_REPO_TOKEN']
-  require 'simplecov'
-  SimpleCov.start
-end
+require 'simplecov'
+SimpleCov.start
 
 require 'simplecov' if ENV['COVERAGE']
 require 'rails/generators'
