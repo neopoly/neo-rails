@@ -11,8 +11,9 @@ env:
   global:
     - CODECLIMATE_REPO_TOKEN=f88e6216112f3039c2ceb879c813ad95b99e4ac13413a7fc104dc176eb7c63bb
   matrix:
-    - RAILS_VERSION=4.2
     - RAILS_VERSION=5.1
+    - RAILS_VERSION=5.0
+    - RAILS_VERSION=4.2
 matrix:
   allow_failures:
   fast_finish: true
