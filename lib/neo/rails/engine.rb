@@ -15,6 +15,12 @@ module Neo
             Neo::Rails::Presenter.view_context = controller.view_context
           end
         end
+
+        ActiveSupport.on_load(:action_mailer) do
+          before_action do |mailer|
+            Neo::Rails::Presenter.view_context = mailer.view_context
+          end
+        end
       end
     end
   end
