@@ -30,7 +30,7 @@ This gem includes:
 
 Add this line to your application's Gemfile:
 
-    gem 'neo-rails', '~> 0.4.0'
+    gem 'neo-rails', '~> 0.4.1'
 
 And then execute:
 
